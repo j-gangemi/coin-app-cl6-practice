@@ -1,8 +1,44 @@
 <h1>KelloggCoin Ledger</h1>
 
+Create an ordered list (ol) with each list item (li) displaying the details of each of the 100 transactions
+If the transaction is anything but the "Initial Coin Offering", i.e. the from_user of the Transaction exists (you can test this condition with something like if from_user), then display the details of the transaction (e.g. 1557 KC from Ben to Brian)
+If the transaction is the "Initial Coin Offering", then display it as such (e.g. Initial coin offering: 10000 to Ben)
+
 <!-- Step 1: List all transactions, starting with the ICO -->
+<%transactions = Transaction.all%>
+<%user = User.all%>
+<p>
+
+<ol>
+<% for transaction in transactions %>
+<% if transaction["from_user_id"] == nil then nil else from_user = User.find_by("id" => transaction["from_user_id"]) end %>
+<% to_user = User.find_by("id" => transaction["to_user_id"]) %>
+<li>
+ <%=transaction["amount"]%> KC
+  <%if transaction["from_user_id"] == nil%>
+  <%then%> 
+  Initial Coin Offering
+  <%else%> 
+  from 
+  <%=from_user["name"]%>
+  <%end%> 
+ to <%=to_user["name"]%>
+</li>
+<%end%>
+</ol>
+</p>
 
 <!-- Step 2: Calculate and display the balances -->
+
+<% for wallet in user %>
+<% if transaction["from_user_id"] == nil then nil else from_user = User.find_by("id" => transaction["from_user_id"]) end %>
+<% to_user = User.find_by("id" => transaction["to_user_id"]) %>
+<ol>
+<li>
+Balance for 
+</li>
+</ol>
+<%end%>
 
 <!-- 
 Expected balances:
