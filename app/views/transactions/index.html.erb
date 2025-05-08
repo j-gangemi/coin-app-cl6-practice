@@ -31,14 +31,25 @@ If the transaction is the "Initial Coin Offering", then display it as such (e.g.
 <!-- Step 2: Calculate and display the balances -->
 
 <% for wallet in user %>
-<% if transaction["from_user_id"] == nil then nil else from_user = User.find_by("id" => transaction["from_user_id"]) end %>
-<% to_user = User.find_by("id" => transaction["to_user_id"]) %>
+<%balance = 0%>
+<%for transaction in transactions%>
+<% if transaction["to_user_id"] == wallet["id"] %>
+<% then balance += transaction["amount"]%>
+<%end%>
+<% if transaction["from_user_id"] == wallet["id"] %>
+<% then balance -= transaction["amount"]%>
+<%end%>
+<%end%>
+<p>
 <ol>
 <li>
-Balance for 
+Balance for <%= wallet["name"]%> is <%=balance%> KC
 </li>
 </ol>
+</p>
+
 <%end%>
+
 
 <!-- 
 Expected balances:
