@@ -29,7 +29,11 @@ If the transaction is the "Initial Coin Offering", then display it as such (e.g.
 </p>
 
 <!-- Step 2: Calculate and display the balances -->
-
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Balance</th>
+  </tr>
 <% for wallet in user %>
 <%balance = 0%>
 <%for transaction in transactions%>
@@ -40,12 +44,20 @@ If the transaction is the "Initial Coin Offering", then display it as such (e.g.
 <% then balance -= transaction["amount"]%>
 <%end%>
 <%end%>
-<p>
-<ol>
-<li>
-Balance for <%= wallet["name"]%> is <%=balance%> KC
-</li>
-</ol>
+<!-- <p> -->
+<!-- <ol> -->
+<!-- <li> -->
+<!-- Balance for <%= wallet["name"]%> is <%=balance%> KC -->
+<!-- </li> -->
+<!-- </ol> -->
+
+  <tr>
+    <td><%=wallet["name"]%></td>
+    <td><%=balance%></td>
+  </tr>
+</table>
+
+
 </p>
 
 <%end%>
